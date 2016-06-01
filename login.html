@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Veggie Check!</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    function login(){      
+      var jqxhr = $.ajax( "http://veggiecheck.herokuapp.com/auth?username="+$("#user").val()+"&password=" + $("#psw").val() )
+      .done(function(response) {
+          if(response != "NO AUTHORIZED")
+            window.location = "menu.html";
+          else
+            $("#messaje").show();
+      })
+      .fail(function() {
+          alert( "ajax error!" );
+      });
+      }
+  </script>
+</head>
+<body>
+<div class="container">
+  <center>
+  <h2>Veggie Check!</h2>
+  </center>
+  <br><br>
+      <label for="email">Usuario:</label>
+      <input type="username" class="form-control" id="user" placeholder="Usuario">
+      <br>  
+      <label for="pwd">Contraseña:</label>
+      <input type="password" class="form-control" id="psw" placeholder="Contraseña">
+    <div class="checkbox">
+      <label><input type="checkbox"> Recordarme</label>
+    </div>
+    <br>
+     <div id="messaje" class="alert alert-danger" style="display:none; "><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>&nbsp;Los datos de acceso son inválidos</div>
+     <br>
+    <center>
+    <button type="submit" class="btn btn-success btn-lg" onclick="login();"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Acceder</button>
+    </center>
+  
+</div>
+</body>
+</html>
